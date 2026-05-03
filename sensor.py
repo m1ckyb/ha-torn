@@ -810,7 +810,7 @@ class TornMoneyWalletSensor(TornSensor):
     """Sensor for wallet."""
 
     _attr_icon = "mdi:wallet"
-    _attr_state_class = SensorStateClass.MEASUREMENT
+    _attr_state_class = SensorStateClass.TOTAL
     _attr_device_class = SensorDeviceClass.MONETARY
     _attr_native_unit_of_measurement = "$"
 
@@ -836,7 +836,7 @@ class TornMoneyCompanySensor(TornSensor):
     """Sensor for company funds."""
 
     _attr_icon = "mdi:office-building"
-    _attr_state_class = SensorStateClass.MEASUREMENT
+    _attr_state_class = SensorStateClass.TOTAL
     _attr_device_class = SensorDeviceClass.MONETARY
     _attr_native_unit_of_measurement = "$"
 
@@ -862,7 +862,7 @@ class TornMoneyVaultSensor(TornSensor):
     """Sensor for vault."""
 
     _attr_icon = "mdi:safe"
-    _attr_state_class = SensorStateClass.MEASUREMENT
+    _attr_state_class = SensorStateClass.TOTAL
     _attr_device_class = SensorDeviceClass.MONETARY
     _attr_native_unit_of_measurement = "$"
 
@@ -888,7 +888,7 @@ class TornMoneyCaymanBankSensor(TornSensor):
     """Sensor for Cayman bank."""
 
     _attr_icon = "mdi:bank"
-    _attr_state_class = SensorStateClass.MEASUREMENT
+    _attr_state_class = SensorStateClass.TOTAL
     _attr_device_class = SensorDeviceClass.MONETARY
     _attr_native_unit_of_measurement = "$"
 
@@ -914,7 +914,7 @@ class TornMoneyCityBankSensor(TornSensor):
     """Sensor for city bank."""
 
     _attr_icon = "mdi:bank"
-    _attr_state_class = SensorStateClass.MEASUREMENT
+    _attr_state_class = SensorStateClass.TOTAL
     _attr_device_class = SensorDeviceClass.MONETARY
     _attr_native_unit_of_measurement = "$"
 
@@ -942,7 +942,7 @@ class TornMoneyFactionSensor(TornSensor):
     """Sensor for faction funds."""
 
     _attr_icon = "mdi:account-group"
-    _attr_state_class = SensorStateClass.MEASUREMENT
+    _attr_state_class = SensorStateClass.TOTAL
     _attr_device_class = SensorDeviceClass.MONETARY
     _attr_native_unit_of_measurement = "$"
 
@@ -970,7 +970,7 @@ class TornMoneyDailyNetworthSensor(TornSensor):
     """Sensor for daily networth."""
 
     _attr_icon = "mdi:chart-line"
-    _attr_state_class = SensorStateClass.MEASUREMENT
+    _attr_state_class = SensorStateClass.TOTAL
     _attr_device_class = SensorDeviceClass.MONETARY
     _attr_native_unit_of_measurement = "$"
 
@@ -996,7 +996,7 @@ class TornMoneyCityBankProfitSensor(TornSensor):
     """Sensor for city bank profit."""
 
     _attr_icon = "mdi:cash-plus"
-    _attr_state_class = SensorStateClass.MEASUREMENT
+    _attr_state_class = SensorStateClass.TOTAL
     _attr_device_class = SensorDeviceClass.MONETARY
     _attr_native_unit_of_measurement = "$"
 
@@ -1383,7 +1383,7 @@ class TornCompanyFundsSensor(TornSensor):
     """Sensor for company funds."""
 
     _attr_icon = "mdi:cash-multiple"
-    _attr_state_class = SensorStateClass.MEASUREMENT
+    _attr_state_class = SensorStateClass.TOTAL
     _attr_device_class = SensorDeviceClass.MONETARY
     _attr_native_unit_of_measurement = "$"
 
@@ -1508,7 +1508,7 @@ class TornCompanyAdvertisingBudgetSensor(TornSensor):
     """Sensor for company advertising budget."""
 
     _attr_icon = "mdi:bullhorn"
-    _attr_state_class = SensorStateClass.MEASUREMENT
+    _attr_state_class = SensorStateClass.TOTAL
     _attr_device_class = SensorDeviceClass.MONETARY
     _attr_native_unit_of_measurement = "$"
 
@@ -1581,7 +1581,7 @@ class TornCompanyDailyIncomeSensor(TornSensor):
     """Sensor for company daily income."""
 
     _attr_icon = "mdi:cash-clock"
-    _attr_state_class = SensorStateClass.MEASUREMENT
+    _attr_state_class = SensorStateClass.TOTAL
     _attr_device_class = SensorDeviceClass.MONETARY
     _attr_native_unit_of_measurement = "$"
 
@@ -1607,7 +1607,7 @@ class TornCompanyWeeklyIncomeSensor(TornSensor):
     """Sensor for company weekly income."""
 
     _attr_icon = "mdi:calendar-cash"
-    _attr_state_class = SensorStateClass.MEASUREMENT
+    _attr_state_class = SensorStateClass.TOTAL
     _attr_device_class = SensorDeviceClass.MONETARY
     _attr_native_unit_of_measurement = "$"
 
@@ -1638,7 +1638,7 @@ class TornStockSensor(TornSensor):
     """Sensor for a stock."""
 
     _attr_icon = "mdi:chart-line"
-    _attr_state_class = SensorStateClass.MEASUREMENT
+    _attr_state_class = SensorStateClass.TOTAL
     _attr_device_class = SensorDeviceClass.MONETARY
     _attr_native_unit_of_measurement = "$"
 
