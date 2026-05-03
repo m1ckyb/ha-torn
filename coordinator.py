@@ -100,9 +100,7 @@ class TornDataUpdateCoordinator(DataUpdateCoordinator[dict[str, Any]]):
                         continue
 
                     # Extract the actual data using the configured key
-                    # The response structure is typically {"key": {...}}
-                    # For endpoints with 'selections' param, the response key is the selection value
-                    response_key = params.get("selections", data_key)
+                    response_key = endpoint_config.get("response_key", params.get("selections", data_key))
                     endpoint_data = data.get(response_key, {})
                     combined_data[data_key] = endpoint_data
 

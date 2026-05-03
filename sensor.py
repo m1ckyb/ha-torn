@@ -109,7 +109,7 @@ async def async_setup_entry(
         entities.append(TornLogLatestSensor(coordinator, entry))
 
     # Company sensors
-    if is_endpoint_enabled("company") or is_endpoint_enabled("company_detailed"):
+    if is_endpoint_enabled("company"):
         entities.extend([
             TornCompanyFundsSensor(coordinator, entry),
             TornCompanyPopularitySensor(coordinator, entry),
@@ -1401,7 +1401,7 @@ class TornCompanyFundsSensor(TornSensor):
     def native_value(self) -> int | None:
         """Return the state."""
         if self.coordinator.data:
-            return self.coordinator.data.get("company_detailed", {}).get("company_funds")
+            return self.coordinator.data.get("company", {}).get("funds")
         return None
 
 
@@ -1426,7 +1426,7 @@ class TornCompanyPopularitySensor(TornSensor):
     def native_value(self) -> int | None:
         """Return the state."""
         if self.coordinator.data:
-            return self.coordinator.data.get("company_detailed", {}).get("popularity")
+            return self.coordinator.data.get("company", {}).get("popularity")
         return None
 
 
@@ -1451,7 +1451,7 @@ class TornCompanyEfficiencySensor(TornSensor):
     def native_value(self) -> int | None:
         """Return the state."""
         if self.coordinator.data:
-            return self.coordinator.data.get("company_detailed", {}).get("efficiency")
+            return self.coordinator.data.get("company", {}).get("efficiency")
         return None
 
 
@@ -1476,7 +1476,7 @@ class TornCompanyEnvironmentSensor(TornSensor):
     def native_value(self) -> int | None:
         """Return the state."""
         if self.coordinator.data:
-            return self.coordinator.data.get("company_detailed", {}).get("environment")
+            return self.coordinator.data.get("company", {}).get("environment")
         return None
 
 
@@ -1500,7 +1500,7 @@ class TornCompanyTrainsAvailableSensor(TornSensor):
     def native_value(self) -> int | None:
         """Return the state."""
         if self.coordinator.data:
-            return self.coordinator.data.get("company_detailed", {}).get("trains_available")
+            return self.coordinator.data.get("company", {}).get("trains")
         return None
 
 
@@ -1526,7 +1526,7 @@ class TornCompanyAdvertisingBudgetSensor(TornSensor):
     def native_value(self) -> int | None:
         """Return the state."""
         if self.coordinator.data:
-            return self.coordinator.data.get("company_detailed", {}).get("advertising_budget")
+            return self.coordinator.data.get("company", {}).get("advertisement_budget")
         return None
 
 
@@ -1599,7 +1599,7 @@ class TornCompanyDailyIncomeSensor(TornSensor):
     def native_value(self) -> int | None:
         """Return the state."""
         if self.coordinator.data:
-            return self.coordinator.data.get("company", {}).get("daily_income")
+            return self.coordinator.data.get("company", {}).get("income", {}).get("daily")
         return None
 
 
@@ -1625,7 +1625,7 @@ class TornCompanyWeeklyIncomeSensor(TornSensor):
     def native_value(self) -> int | None:
         """Return the state."""
         if self.coordinator.data:
-            return self.coordinator.data.get("company", {}).get("weekly_income")
+            return self.coordinator.data.get("company", {}).get("income", {}).get("weekly")
         return None
 
 

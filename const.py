@@ -93,8 +93,7 @@ ENDPOINT_CATEGORIES = {
         "enabled_by_default": True,
         "can_disable": True,
         "endpoints": [
-            {"path": "/company", "key": "company_detailed", "params": {"selections": "detailed"}, "cache_for": CACHE_DURATION_MEDIUM},
-            {"path": "/company", "key": "company", "cache_for": CACHE_DURATION_MEDIUM},
+            {"path": "/v2/company", "key": "company", "response_key": "profile", "cache_for": CACHE_DURATION_MEDIUM},
         ],
     },
     CONF_ENABLE_STOCKS: {
@@ -137,8 +136,7 @@ API_ENDPOINTS = [
     {"path": "/v2/user/log", "key": "log", "params": {"limit": "10"}, "cache_for": CACHE_DURATION_SHORT},
     {"path": "/v2/user/cooldowns", "key": "cooldowns", "cache_for": CACHE_DURATION_MEDIUM},
     {"path": "/v2/user/personalstats", "key": "personalstats", "params": {"cat": "all"}, "cache_for": CACHE_DURATION_MEDIUM},
-    {"path": "/company", "key": "company_detailed", "params": {"selections": "detailed"}, "cache_for": CACHE_DURATION_MEDIUM},
-    {"path": "/company", "key": "company", "cache_for": CACHE_DURATION_MEDIUM},
+    {"path": "/v2/company", "key": "company", "response_key": "profile", "cache_for": CACHE_DURATION_MEDIUM},
     {"path": "/v2/user/skills", "key": "skills", "cache_for": CACHE_DURATION_LONG},
     {"path": "/user", "key": "refills", "params": {"selections": "refills"}, "cache_for": CACHE_DURATION_LONG},
     {"path": "/torn", "key": "torn_stocks", "params": {"selections": "stocks"}, "cache_for": CACHE_DURATION_MEDIUM},
