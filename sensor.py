@@ -123,6 +123,13 @@ async def async_setup_entry(
             TornCompanyWeeklyIncomeSensor(coordinator, entry),
         ])
 
+    # Education sensors
+    if is_endpoint_enabled("education"):
+        entities.extend([
+            TornEducationCurrentSensor(coordinator, entry),
+            TornEducationTimeleftSensor(coordinator, entry),
+        ])
+
     # Add dynamic skill sensors
     if is_endpoint_enabled("skills") and coordinator.data and "skills" in coordinator.data:
         skills = coordinator.data["skills"]
@@ -1773,3 +1780,57 @@ class TornStockSensor(TornSensor):
                 attributes["total_profit_loss"] = total_current_value - total_invested
 
         return attributes
+
+# ============================================================================
+# Education Sensors
+# ============================================================================
+
+
+class TornEducationCurrentSensor(TornSensor):
+    """Sensor for current education course."""
+
+    _attr_icon = "mdi:school"
+
+    @property
+    def unique_id(self) -> str:
+        """Return unique ID."""
+        return f"{self.entry.entry_id}_education_current"
+
+    @property
+    def name(self) -> str:
+        """Return sensor name."""
+        return "Education Current"
+
+    @property
+    def native_value(self) -> int | str | None:
+        """Return the state."""
+        if self.coordinator.data:
+            return self.coordinator.data.get("education", {}).get("education_current")
+        return None
+
+
+class TornEducationTimeleftSensor(TornSensor):
+    """Sensor for education time left."""
+
+    _attr_icon = "mdi:timer-sand"
+    _attr_device_class = SensorDeviceClass.TIMESTAMP
+
+    @property
+    def unique_id(self) -> str:
+        """Return unique ID."""
+        return f"{self.entry.entry_id}_education_timeleft"
+
+    @property
+    def name(self) -> str:
+        """Return sensor name."""
+        return "Education Time Left"
+
+    @property
+    def native_value(self) -> datetime | None:
+        """Return the state as timestamp."""
+        if self.coordinator.data:
+            seconds = self.coordinator.data.get("education", {}).get("education_timeleft", 0)
+            if seconds > 0:
+                fetch_time = self.coordinator.cache_times.get("education", datetime.now(timezone.utc).timestamp())
+                return datetime.fromtimestamp(fetch_time, tz=timezone.utc).replace(microsecond=0) + timedelta(seconds=seconds)
+        return None

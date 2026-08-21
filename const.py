@@ -20,6 +20,7 @@ CONF_ENABLE_COMPANY = "enable_company"
 CONF_ENABLE_STOCKS = "enable_stocks"
 CONF_ENABLE_REFILLS = "enable_refills"
 CONF_ENABLE_LOG = "enable_log"
+CONF_ENABLE_EDUCATION = "enable_education"
 
 # Default values
 DEFAULT_SCAN_INTERVAL = 1
@@ -115,6 +116,15 @@ ENDPOINT_CATEGORIES = {
             {"path": "/user", "key": "refills", "params": {"selections": "refills"}, "cache_for": CACHE_DURATION_LONG},
         ],
     },
+    CONF_ENABLE_EDUCATION: {
+        "name": "Education",
+        "description": "Current education course and status",
+        "enabled_by_default": True,
+        "can_disable": True,
+        "endpoints": [
+            {"path": "/user", "key": "education", "params": {"selections": "education"}, "cache_for": CACHE_DURATION_LONG},
+        ],
+    },
     CONF_ENABLE_LOG: {
         "name": "Activity Log",
         "description": "Recent activity log",
@@ -139,6 +149,7 @@ API_ENDPOINTS = [
     {"path": "/v2/company", "key": "company", "response_key": "profile", "cache_for": CACHE_DURATION_MEDIUM},
     {"path": "/v2/user/skills", "key": "skills", "cache_for": CACHE_DURATION_LONG},
     {"path": "/user", "key": "refills", "params": {"selections": "refills"}, "cache_for": CACHE_DURATION_LONG},
+    {"path": "/user", "key": "education", "params": {"selections": "education"}, "cache_for": CACHE_DURATION_LONG},
     {"path": "/torn", "key": "torn_stocks", "params": {"selections": "stocks"}, "cache_for": CACHE_DURATION_MEDIUM},
     {"path": "/user", "key": "user_stocks", "params": {"selections": "stocks"}, "cache_for": CACHE_DURATION_MEDIUM},
 ]
