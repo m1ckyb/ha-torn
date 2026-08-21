@@ -101,7 +101,12 @@ class TornDataUpdateCoordinator(DataUpdateCoordinator[dict[str, Any]]):
 
                     # Extract the actual data using the configured key
                     response_key = endpoint_config.get("response_key", params.get("selections", data_key))
-                    endpoint_data = data.get(response_key, {})
+                    if response_key in data:
+                        endpoint_data = data[response_key]
+                    else:
+                        # Fallback: if the key isn't present, the API might be returning the data at the root level
+                        endpoint_data = data
+                    
                     combined_data[data_key] = endpoint_data
 
                     # Update cache
