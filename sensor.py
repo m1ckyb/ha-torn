@@ -1805,7 +1805,14 @@ class TornEducationCurrentSensor(TornSensor):
     def native_value(self) -> int | str | None:
         """Return the state."""
         if self.coordinator.data:
-            return self.coordinator.data.get("education", {}).get("education_current")
+            course_id = self.coordinator.data.get("education", {}).get("education_current")
+            if course_id is not None and course_id != 0:
+                # Try to get the name from torn_education data
+                torn_education = self.coordinator.data.get("torn_education", {})
+                course_data = torn_education.get(str(course_id))
+                if course_data and "name" in course_data:
+                    return course_data["name"]
+            return course_id
         return None
 
 

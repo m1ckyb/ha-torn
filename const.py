@@ -123,6 +123,7 @@ ENDPOINT_CATEGORIES = {
         "can_disable": True,
         "endpoints": [
             {"path": "/user", "key": "education", "params": {"selections": "education"}, "cache_for": CACHE_DURATION_LONG},
+            {"path": "/torn", "key": "torn_education", "params": {"selections": "education"}, "cache_for": CACHE_DURATION_LONG},
         ],
     },
     CONF_ENABLE_LOG: {
@@ -150,6 +151,7 @@ API_ENDPOINTS = [
     {"path": "/v2/user/skills", "key": "skills", "cache_for": CACHE_DURATION_LONG},
     {"path": "/user", "key": "refills", "params": {"selections": "refills"}, "cache_for": CACHE_DURATION_LONG},
     {"path": "/user", "key": "education", "params": {"selections": "education"}, "cache_for": CACHE_DURATION_LONG},
+    {"path": "/torn", "key": "torn_education", "params": {"selections": "education"}, "cache_for": CACHE_DURATION_LONG},
     {"path": "/torn", "key": "torn_stocks", "params": {"selections": "stocks"}, "cache_for": CACHE_DURATION_MEDIUM},
     {"path": "/user", "key": "user_stocks", "params": {"selections": "stocks"}, "cache_for": CACHE_DURATION_MEDIUM},
 ]
