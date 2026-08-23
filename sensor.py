@@ -1923,3 +1923,10 @@ class TornVirusTimeLeftSensor(TornSensor):
             if until and until > 0:
                 return datetime.fromtimestamp(until, tz=timezone.utc)
         return None
+
+    @property
+    def extra_state_attributes(self) -> dict[str, Any]:
+        """Return additional attributes."""
+        if self.coordinator.data:
+            return {"raw_data": self.coordinator.data.get("virus", {})}
+        return {}
