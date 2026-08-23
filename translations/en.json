@@ -33,7 +33,8 @@
           "enable_stocks": "Stocks (all 35 stocks with block details)",
           "enable_refills": "Refills",
           "enable_education": "Education (current course and time left)",
-          "enable_log": "Activity Log (latest 10 entries)"
+          "enable_log": "Activity Log (latest 10 entries)",
+          "enable_virus": "Virus (current programming progress)"
         }
       }
     }

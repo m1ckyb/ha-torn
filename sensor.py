@@ -130,6 +130,13 @@ async def async_setup_entry(
             TornEducationTimeleftSensor(coordinator, entry),
         ])
 
+    # Virus sensors
+    if is_endpoint_enabled("virus"):
+        entities.extend([
+            TornVirusNameSensor(coordinator, entry),
+            TornVirusTimeLeftSensor(coordinator, entry),
+        ])
+
     # Add dynamic skill sensors
     if is_endpoint_enabled("skills") and coordinator.data and "skills" in coordinator.data:
         skills = coordinator.data["skills"]
@@ -1840,4 +1847,53 @@ class TornEducationTimeleftSensor(TornSensor):
             if seconds > 0:
                 fetch_time = self.coordinator.cache_times.get("education", datetime.now(timezone.utc).timestamp())
                 return datetime.fromtimestamp(fetch_time, tz=timezone.utc).replace(microsecond=0) + timedelta(seconds=seconds)
+        return None
+
+# ============================================================================
+# Virus Sensors
+# ============================================================================
+
+class TornVirusNameSensor(TornSensor):
+    """Sensor for current virus programming name."""
+
+    _attr_icon = "mdi:bug"
+
+    @property
+    def unique_id(self) -> str:
+        """Return unique ID."""
+        return f"{self.entry.entry_id}_virus_name"
+
+    @property
+    def name(self) -> str:
+        """Return sensor name."""
+        return "Virus Name"
+
+    @property
+    def native_value(self) -> str | None:
+        """Return the state."""
+        if self.coordinator.data:
+            return self.coordinator.data.get("virus", {}).get("name")
+        return None
+
+
+class TornVirusTimeLeftSensor(TornSensor):
+    """Sensor for virus programming time left."""
+
+    _attr_icon = "mdi:timer-sand"
+
+    @property
+    def unique_id(self) -> str:
+        """Return unique ID."""
+        return f"{self.entry.entry_id}_virus_time_left"
+
+    @property
+    def name(self) -> str:
+        """Return sensor name."""
+        return "Virus Time Left"
+
+    @property
+    def native_value(self) -> int | str | None:
+        """Return the state."""
+        if self.coordinator.data:
+            return self.coordinator.data.get("virus", {}).get("time_left")
         return None

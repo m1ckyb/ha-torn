@@ -21,6 +21,7 @@ CONF_ENABLE_STOCKS = "enable_stocks"
 CONF_ENABLE_REFILLS = "enable_refills"
 CONF_ENABLE_LOG = "enable_log"
 CONF_ENABLE_EDUCATION = "enable_education"
+CONF_ENABLE_VIRUS = "enable_virus"
 
 # Default values
 DEFAULT_SCAN_INTERVAL = 1
@@ -135,6 +136,15 @@ ENDPOINT_CATEGORIES = {
             {"path": "/v2/user/log", "key": "log", "params": {"limit": "10"}, "cache_for": CACHE_DURATION_SHORT},
         ],
     },
+    CONF_ENABLE_VIRUS: {
+        "name": "Virus",
+        "description": "Current virus programming progress",
+        "enabled_by_default": True,
+        "can_disable": True,
+        "endpoints": [
+            {"path": "/v2/user/virus", "key": "virus", "cache_for": CACHE_DURATION_LONG},
+        ],
+    },
 }
 
 # API Endpoints to fetch (built from enabled categories)
@@ -154,6 +164,7 @@ API_ENDPOINTS = [
     {"path": "/torn", "key": "torn_education", "params": {"selections": "education"}, "cache_for": CACHE_DURATION_LONG},
     {"path": "/torn", "key": "torn_stocks", "params": {"selections": "stocks"}, "cache_for": CACHE_DURATION_MEDIUM},
     {"path": "/user", "key": "user_stocks", "params": {"selections": "stocks"}, "cache_for": CACHE_DURATION_MEDIUM},
+    {"path": "/v2/user/virus", "key": "virus", "cache_for": CACHE_DURATION_LONG},
 ]
 
 
