@@ -1872,7 +1872,12 @@ class TornVirusNameSensor(TornSensor):
     def native_value(self) -> str | None:
         """Return the state."""
         if self.coordinator.data:
-            return self.coordinator.data.get("virus", {}).get("name")
+            virus = self.coordinator.data.get("virus", {})
+            # Depending on if data is at root or under 'virus'
+            if "coding" in virus:
+                return virus.get("coding", {}).get("name")
+            else:
+                return virus.get("name")
         return None
 
 
@@ -1880,6 +1885,7 @@ class TornVirusTimeLeftSensor(TornSensor):
     """Sensor for virus programming time left."""
 
     _attr_icon = "mdi:timer-sand"
+    _attr_device_class = SensorDeviceClass.TIMESTAMP
 
     @property
     def unique_id(self) -> str:
@@ -1892,8 +1898,16 @@ class TornVirusTimeLeftSensor(TornSensor):
         return "Virus Time Left"
 
     @property
-    def native_value(self) -> int | str | None:
-        """Return the state."""
+    def native_value(self) -> datetime | None:
+        """Return the state as timestamp."""
         if self.coordinator.data:
-            return self.coordinator.data.get("virus", {}).get("time_left")
+            virus = self.coordinator.data.get("virus", {})
+            until = None
+            if "coding" in virus:
+                until = virus.get("coding", {}).get("until")
+            else:
+                until = virus.get("until")
+                
+            if until and until > 0:
+                return datetime.fromtimestamp(until, tz=timezone.utc)
         return None
