@@ -1874,19 +1874,21 @@ class TornVirusNameSensor(TornSensor):
         if self.coordinator.data:
             virus = self.coordinator.data.get("virus", {})
             
-            # Check under coding object
+            # Check under item object (Torn API v2)
+            if "item" in virus:
+                name = virus.get("item", {}).get("name")
+                if name:
+                    return str(name)
+                    
+            # Check under coding object (fallback/old structure)
             if "coding" in virus:
                 coding = virus.get("coding", {})
-                name = coding.get("name")
-                if not name:
-                    name = coding.get("virus_id")
+                name = coding.get("name") or coding.get("virus_id")
                 if name:
                     return str(name)
             
             # Check at root of virus object
-            name = virus.get("name")
-            if not name:
-                name = virus.get("virus_id")
+            name = virus.get("name") or virus.get("virus_id")
             if name:
                 return str(name)
                 
@@ -1923,10 +1925,3 @@ class TornVirusTimeLeftSensor(TornSensor):
             if until and until > 0:
                 return datetime.fromtimestamp(until, tz=timezone.utc)
         return None
-
-    @property
-    def extra_state_attributes(self) -> dict[str, Any]:
-        """Return additional attributes."""
-        if self.coordinator.data:
-            return {"raw_data": self.coordinator.data.get("virus", {})}
-        return {}
