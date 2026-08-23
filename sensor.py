@@ -1873,11 +1873,23 @@ class TornVirusNameSensor(TornSensor):
         """Return the state."""
         if self.coordinator.data:
             virus = self.coordinator.data.get("virus", {})
-            # Depending on if data is at root or under 'virus'
+            
+            # Check under coding object
             if "coding" in virus:
-                return virus.get("coding", {}).get("name")
-            else:
-                return virus.get("name")
+                coding = virus.get("coding", {})
+                name = coding.get("name")
+                if not name:
+                    name = coding.get("virus_id")
+                if name:
+                    return str(name)
+            
+            # Check at root of virus object
+            name = virus.get("name")
+            if not name:
+                name = virus.get("virus_id")
+            if name:
+                return str(name)
+                
         return None
 
 
